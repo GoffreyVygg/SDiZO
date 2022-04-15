@@ -16,19 +16,7 @@ int suma = 0;
 void WczytajZPliku() {
 	FILE *plikWejsciowy;
 	// Wybor macierzy
-	/*
-	const char* macierz = "macierz";
-    //int n1 = 1234;
-    char *num;
-    char buffer[100];
-    if (asprintf(&num, "%d", V) == -1) {
-        perror("asprintf");
-    } else {
-        strcat(strcpy(buffer, "macierz"), num);
-        strcat(buffer, ".txt");
-    }
-	*/
-	if((plikWejsciowy = fopen("macierz1000.txt","r")) == NULL) {
+	if((plikWejsciowy = fopen(buffer,"r")) == NULL) {
 		printf("Blad odczytu\n");
 		exit(1);
 	}

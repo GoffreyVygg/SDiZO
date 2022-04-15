@@ -1,5 +1,8 @@
 // Ilosc wierzcholkow
-#define V 10
+#define V 5
 
 // Liczba iteracji
-int iteracje = 10;
+int iteracje = 1;
+
+// Nazwa pliku zawierajacego macierz
+char buffer[100] = "graf.txt";
