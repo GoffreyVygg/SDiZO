@@ -1,0 +1,5 @@
+// Ilosc wierzcholkow
+#define V 1000
+
+// Liczba iteracji
+int iteracje = 10;

@@ -1,0 +1,7 @@
+*.INI
+(txt)
+
+plik źródłowy
+plik(i) wynikowe	test#.txt
+"krok w instancji"
+liczba "powtórek"
