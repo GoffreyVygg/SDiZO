@@ -1,3 +1,3 @@
 # SDIZO
 
-Data structures and computational complexity (Struktury danych i złożoność obliczeniowa)
+Ongoing course of data structures and computational complexity.
