@@ -10,13 +10,14 @@
 
 int G[V][V];
 
+FILE *plikWejsciowy, *plikWyjsciowy, *plik;
+
 int suma = 0;
 
 // Funkcja wczytujaca macierz kwadratowa z pliku
 void WczytajZPliku() {
-	FILE *plikWejsciowy;
 	// Wybor macierzy
-	if((plikWejsciowy = fopen(buffer,"r")) == NULL) {
+	if((plikWejsciowy = fopen(input,"r")) == NULL) {
 		printf("Blad odczytu\n");
 		exit(1);
 	}
@@ -42,14 +43,16 @@ void zmierzCzas() {
 	printf("Czas wykonania: %.6f s\n", czasWykonania);
 }
 
-FILE *plikWyjsciowy;
-
 void main() {
 	// Wczytywanie liczb
 	WczytajZPliku();
-	//plikWyjsciowy = fopen("Prim.xls","a");
-	//fprintf(plikWyjsciowy, "Ilosc wierzcholkow\tSredni czas\n");
-	//fclose(plikWyjsciowy);
+	
+	// Inicjalizacja pliku do wyswietlenia drzewa, zapis ilosci wierzcholkow
+	plik = fopen(output,"w");
+	fprintf(plik, "%d\n", V);
+	fclose(plik);
+	
+	// Petla okreslajaca ilosc iteracji
 	for(int i = 0; i < iteracje; i++) {
 		// Calkowity koszt przejscia
 		int sumaWag = 0;
@@ -65,6 +68,7 @@ void main() {
 		// Poczatek pomiaru czasu
 		gettimeofday(&start,0);
 		
+		// Wyznaczanie MST
 		while(ileKrawedzi < V - 1) {
 			int min = INF;
 			int x = 0;
@@ -83,6 +87,9 @@ void main() {
 				}
 			}
 			printf("Krawedz: %d - %d, Waga: %d\n", x, y, G[x][y]);
+			plik = fopen(output,"a");
+			fprintf(plik, "%d\t%d\t%d\n",x, y, G[x][y]);
+			fclose(plik);
 			sumaWag += G[x][y];
 			odwiedzone[y] = true;
 			ileKrawedzi++;
@@ -96,6 +103,7 @@ void main() {
 		zmierzCzas();
 		suma = sumaWag;
 	}	
+	// Zapis czasu
 	sredniCzas = czasCalkowity/iteracje;
 	printf("Sredni czas: %.6f s\n", sredniCzas);
 	plikWyjsciowy = fopen("Prim.xls","a");
