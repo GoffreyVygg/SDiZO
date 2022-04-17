@@ -13,6 +13,6 @@ end
 
 G2 = graph(G2);
 plot(G2,'EdgeLabel',G2.Edges.Weight)
-title('Ilosc wiercholkow', V)
+title('Ilosc wiercholkow:', V)
 
 end
