@@ -17,7 +17,7 @@ int suma = 0;
 // Funkcja wczytujaca macierz kwadratowa z pliku
 void WczytajZPliku() {
 	// Wybor macierzy
-	if((plikWejsciowy = fopen(input,"r")) == NULL) {
+	if((plikWejsciowy = fopen(macierzWej,"r")) == NULL) {
 		printf("Blad odczytu\n");
 		exit(1);
 	}
@@ -48,7 +48,7 @@ void main() {
 	WczytajZPliku();
 	
 	// Inicjalizacja pliku do wyswietlenia drzewa, zapis ilosci wierzcholkow
-	plik = fopen(output,"w");
+	plik = fopen(wynikPrim,"w");
 	fprintf(plik, "%d\n", V);
 	fclose(plik);
 	
@@ -87,7 +87,7 @@ void main() {
 				}
 			}
 			printf("Krawedz: %d - %d, Waga: %d\n", x, y, G[x][y]);
-			plik = fopen(output,"a");
+			plik = fopen(wynikPrim,"a");
 			fprintf(plik, "%d\t%d\t%d\n",x, y, G[x][y]);
 			fclose(plik);
 			sumaWag += G[x][y];
@@ -106,7 +106,7 @@ void main() {
 	// Zapis czasu
 	sredniCzas = czasCalkowity/iteracje;
 	printf("Sredni czas: %.6f s\n", sredniCzas);
-	plikWyjsciowy = fopen("Prim.xls","a");
+	plikWyjsciowy = fopen(czasPrim,"a");
 	fprintf(plikWyjsciowy, "%d\t%f\t%d\n",V, sredniCzas,suma);
 	fclose(plikWyjsciowy);
 }
