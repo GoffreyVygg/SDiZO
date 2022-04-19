@@ -63,7 +63,6 @@ int znajdzNajkrotsza(int odleglosc[], bool sptSet[])
 // Wyswietlanie sciezki 
 void wypiszSciezke(int sciezka[], int j)
 {
-    // Base Case : If j is source
     if (sciezka[j] == -1)
         return;
     wypiszSciezke(sciezka, sciezka[j]);
@@ -97,8 +96,7 @@ void dijkstra(int graf[V][V], int zadanyV)
         int u = znajdzNajkrotsza(odleglosci, sptSet);
         sptSet[u] = true;
         for (int v = 0; v < V; v++)
-            if (!sptSet[v] && graf[u][v]
-                && odleglosci[u] + graf[u][v] < odleglosci[v]) {
+            if (!sptSet[v] && graf[u][v] && odleglosci[u] + graf[u][v] < odleglosci[v]) {
                 tablicaSPT[v] = u;
                 odleglosci[v] = odleglosci[u] + graf[u][v];
             }
@@ -109,12 +107,7 @@ void dijkstra(int graf[V][V], int zadanyV)
 
 void main() {
 	// Wczytywanie liczb
-	WczytajZPliku();
-	// Inicjalizacja pliku do wyswietlenia drzewa, zapis ilosci wierzcholkow
-	plik = fopen(wynikDijkstra,"w");
-	fprintf(plik, "%d\n", V);
-	fclose(plik);
-	
+	WczytajZPliku();	
 	// Petla okreslajaca ilosc iteracji
 	for(int i = 0; i < iteracje; i++) {
 		// Poczatek pomiaru czasu
