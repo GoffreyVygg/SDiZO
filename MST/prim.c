@@ -8,6 +8,7 @@
 
 #define INF 9999999
 
+int tempG[1000][1000];
 int G[V][V];
 
 FILE *plikWejsciowy, *plikWyjsciowy, *plik;
@@ -22,13 +23,18 @@ void WczytajZPliku() {
 		exit(1);
 	}
 	int wczytanaLiczba;
-	for(int i = 0; i < V; i++) {
-		for(int j = 0; j < V; j++) {
+	for(int i = 0; i < 1000; i++) {
+		for(int j = 0; j < 1000; j++) {
 			fscanf(plikWejsciowy, "%d,", &wczytanaLiczba);
-			G[i][j] = wczytanaLiczba;
+			tempG[i][j] = wczytanaLiczba;
 		}
 	}
-	fclose(plikWejsciowy);	
+	fclose(plikWejsciowy);
+	for(int i = 0; i < V; i++) {
+		for(int j = 0; j < V; j++) {
+			G[i][j] = tempG[i][j];
+		}
+	}
 }
 
 // Do wyznaczania czasu
