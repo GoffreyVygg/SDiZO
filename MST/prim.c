@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <string.h> 
 #include <sys/time.h>
-#include "ini.h"
+#include "prim.h"
 
 #define INF 9999999
 

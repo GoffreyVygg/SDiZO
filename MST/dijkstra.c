@@ -4,13 +4,14 @@
 #include <stdbool.h>
 #include <string.h> 
 #include <sys/time.h>
-#include "ini.h"
+#include "dijkstrac.h"
 
 // Nieskonczonosc
 #define INF 9999999
 
 // Graf
-int G[V][V];
+int G[1000][1000];
+int G2[V][V];
 
 // Pliki
 FILE *plikWejsciowy, *plikWyjsciowy, *plik;
@@ -27,13 +28,18 @@ void WczytajZPliku() {
 		exit(1);
 	}
 	int wczytanaLiczba;
-	for(int i = 0; i < V; i++) {
-		for(int j = 0; j < V; j++) {
+	for(int i = 0; i < 1000; i++) {
+		for(int j = 0; j < 1000; j++) {
 			fscanf(plikWejsciowy, "%d,", &wczytanaLiczba);
 			G[i][j] = wczytanaLiczba;
 		}
 	}
-	fclose(plikWejsciowy);	
+	fclose(plikWejsciowy);
+	for(int i = 0; i < V; i++) {
+		for(int j = 0; j < V; j++) {
+			G2[i][j] = G[i][j];
+		}
+	}
 }
 
 
@@ -101,7 +107,7 @@ void dijkstra(int graf[V][V], int zadanyV)
                 odleglosci[v] = odleglosci[u] + graf[u][v];
             }
     }
-    wypiszRozwiazanie(odleglosci, V, tablicaSPT);
+    //wypiszRozwiazanie(odleglosci, V, tablicaSPT);
 	printf("\n");
 }
 
@@ -113,7 +119,7 @@ void main() {
 		// Poczatek pomiaru czasu
 		gettimeofday(&start,0);
 		// Wyznaczanie SPT
-		dijkstra(G, 0);
+		dijkstra(G2, 0);
 		// Koniec pomiaru czasu
 		gettimeofday(&koniec,0);
 		// Obliczenie czasu trwania iteracji
