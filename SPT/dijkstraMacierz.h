@@ -1,5 +1,5 @@
 // Ilosc wierzcholkow
-#define V 10
+#define V 20
 
 // Liczba iteracji
 int iteracje = 1;
@@ -8,10 +8,10 @@ int iteracje = 1;
 bool pomiary = false;
 
 // Nazwa pliku zawierajacego macierz wejsciowa
-char macierzWej[] = "Adjacency matrixes/macierz10.txt";
+char macierzWej[] = "Adjacency matrixes/macierz1000.txt";
 
 // Calkowita ilosc wierzcholkow w pliku
-#define calkIloscV 10
+#define calkIloscV 1000
 
 // Nazwa pliku z wynikami pomiaru czasu dla algorytmu Dijkstry
 char czasDijkstra[] = "czasDijkstra.xls";

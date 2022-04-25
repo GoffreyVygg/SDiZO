@@ -1,5 +1,5 @@
 // Ilosc wierzcholkow
-const int V = 10;
+const int V = 20;
 
 // Liczba iteracji
 int iteracje = 1;
@@ -8,10 +8,10 @@ int iteracje = 1;
 bool pomiary = false;
 
 // Nazwa pliku zawierajacego macierz wejsciowa
-char macierzWej[] = "Adjacency matrixes/macierzUjemna.txt";
+char macierzWej[] = "Adjacency matrixes/macierz1000.txt";
 	
 // Calkowita ilosc wierzcholkow w pliku
-const int calkIloscV = 10;
+const int calkIloscV = 1000;
 
 // Nazwa pliku z wynikami pomiaru czasu dla algorytmu Bellmana-Forda
 char czas[] = "czasBellmanFord.xls";

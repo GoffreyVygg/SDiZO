@@ -1,5 +1,5 @@
 // Ilosc wierzcholkow
-const int V = 10;
+const int V = 20;
 
 // Liczba iteracji
 int iteracje = 1;

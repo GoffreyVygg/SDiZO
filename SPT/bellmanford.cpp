@@ -55,5 +55,7 @@ int main() {
 	plikWyjsciowy = fopen(czas,"a");
 	fprintf(plikWyjsciowy, "%d\t%f\n",V, sredniCzas);
 	fclose(plikWyjsciowy);
+	printf("\nWcisnij ENTER aby zakonczyc\n", sredniCzas);
+	int ch = getchar();
 	return 0;
 }
