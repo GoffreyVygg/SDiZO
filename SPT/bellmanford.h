@@ -8,10 +8,10 @@ int iteracje = 1;
 bool pomiary = false;
 
 // Nazwa pliku zawierajacego macierz wejsciowa
-char macierzWej[] = "Adjacency matrixes/macierz1000.txt";
+char macierzWej[] = "Adjacency matrixes/macierzUjemna.txt";
 	
 // Calkowita ilosc wierzcholkow w pliku
-const int calkIloscV = 1000;
+const int calkIloscV = 10;
 
 // Nazwa pliku z wynikami pomiaru czasu dla algorytmu Bellmana-Forda
 char czas[] = "czasBellmanFord.xls";
@@ -80,7 +80,7 @@ void BellmanFord(struct Graph* graph, int src, bool wyswietlanie) {
         int v = graph->edge[i].dest;
         int weight = graph->edge[i].weight;
         if (dist[u] != INF && dist[u] + weight < dist[v]) {
-            printf("Graph contains negative weight cycle");
+            printf("Graph contains negative weight cycle\n");
             return; 
         }
     }

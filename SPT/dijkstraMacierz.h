@@ -8,10 +8,10 @@ int iteracje = 1;
 bool pomiary = false;
 
 // Nazwa pliku zawierajacego macierz wejsciowa
-char macierzWej[] = "Adjacency matrixes/macierz1000.txt";
+char macierzWej[] = "Adjacency matrixes/macierz10.txt";
 
 // Calkowita ilosc wierzcholkow w pliku
-#define calkIloscV 1000
+#define calkIloscV 10
 
 // Nazwa pliku z wynikami pomiaru czasu dla algorytmu Dijkstry
 char czasDijkstra[] = "czasDijkstra.xls";
@@ -49,8 +49,9 @@ int znajdzNajkrotsza(int odleglosc[], bool sptSet[])
 // Wyswietlanie sciezki 
 void wypiszSciezke(int sciezka[], int j)
 {
-    if (sciezka[j] == -1)
+    if (sciezka[j] == -1) {
         return;
+	}
     wypiszSciezke(sciezka, sciezka[j]);
     printf("%d ", j);
 }
@@ -66,7 +67,6 @@ int wypiszRozwiazanie(int odleglosc[], int n, int parent[])
         wypiszSciezke(parent, i);
     }
 }
-
 
 // Funkcja realizujaca wyznaczenie SPT 
 void dijkstra(int graf[V][V], int zadanyV, bool wyswietlanie)

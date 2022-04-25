@@ -1,5 +1,5 @@
 // Ilosc wierzcholkow
-#define V 10
+#define V 20
 
 // Liczba iteracji
 int iteracje = 1;
