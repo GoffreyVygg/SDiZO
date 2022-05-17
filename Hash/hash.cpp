@@ -7,78 +7,111 @@ using namespace std;
  
 // Funkcja haszująca
 //------------------
-int hf (string s) {
-  unsigned int h, i;
-
-  h = 0;
-  for( i = 0; i < s.length( ); i++ )
-    h = 2 * h + 1 - ( s [ i ] & 1 );
-  return h % 10;
-}
-
-// Funkcja tworzy łańcuch 4 znakowy z A i B
-// na podstawie wartości bitów x
-//-----------------------------------------
-string s4 ( int x )
-{
-  string s = "";
-  int m = 8;  // Maska bitowa
-  while( m )
-  {
-    s += ( x & m )? 'B' : 'A';
-    m >>= 1;
-  }
-  return s;
+int hf(string s) {
+	unsigned int h;
+	for(int i = 0; i < s.length(); i++) {
+		h = 2 * h + 1 - (s[i] & 1);
+	}
+	return h % 10;
 }
  
 int main() {
+	string T[ileSlow];
+	
 	string Array[ileSlow];
 
     ifstream myFile(plikWej);
 
-    if (!myFile ) {
+    if(!myFile ) {
         printf("Error reading file\n");
         exit(1);
     }
-    for (int i = 0; i < ileSlow; i++) {
+    for(int i = 0; i < ileSlow; i++) {
 		myFile >> Array[i];
     }
-	struct node* root = NULL;
+	
+	
+	// Zerujemy tablicę haszowaną
+	for(int i = 0; i < ileSlow; i++) {
+		T [i] = "";
+	}
+	
+	// Tablicę wypełniamy łańcuchami
 	gettimeofday(&start,0);
-    for (int i = 0; i < ileSlow; i++) {
-		if (i == 0) {
-			root = insert(root, Array[i]);
-		} else {
-			insert(root, Array[i]);
-		}			
-    }
+	for(int i = 0; i < ileSlow; i++) {
+		// Łańcuch umieszczamy w tablicy haszowanej
+		int h = hf (Array[i]);
+		int j = h;
+		while(true) {
+			if(T[j] == "") {
+				T[j] = Array[i];
+				break;
+			}
+			if(T[j] == Array[i]) {
+				break;
+			}
+			j = (j + 1) % ileSlow;
+			if(j == h) {
+				break;
+			}
+		}
+	}
 	gettimeofday(&koniec,0);
 	long sec = koniec.tv_sec - start.tv_sec;
 	long usec = koniec.tv_usec - start.tv_usec;
 	double czasWykonania = sec + usec*1e-6;
-	
-	plikWyjsciowy = fopen(czas,"a");
-	fprintf(plikWyjsciowy, "%d\t%f\n", ileSlow, czasWykonania);
-	fclose(plikWyjsciowy);
-	
-	inorder(root);
 
-	printf("\nPoczatek pomiaru czasu usuwania:\n");
-	for (int i = 0; i < ileSlow; i += 5) {
+	// Wyświetlamy zawartość tablicy wraz z wartością funkcji haszującej
+	for(int i = 0; i < ileSlow; i++) {
+		cout << "T[" << i << "]" << '\t' << "=" << '\t';
+		if(T[i] != "" ) {
+			cout << T[i] << '\t' << '\t' << "hf( ) = " << hf(T[i]); 
+		} else {
+			cout << "-";
+		}
+		cout << endl;
+	}
+	
+	// Sprawdzamy obecność łańcuchów w tablicy haszowanej
+	for(int i = 0; i < ileSlow; i += 5) {
 		gettimeofday(&start,0);
-		root = deleteNode(root, Array[i]);	
-		gettimeofday(&koniec,0);
-		long secs = koniec.tv_sec - start.tv_sec;
-		long usecs = koniec.tv_usec - start.tv_usec;
-		double czasUsuwania = secs + usecs*1e-6;
-		czasCalkowity += czasUsuwania;
-		printf("%f\t%f\n", czasCalkowity, czasUsuwania);
+		int h = hf (Array[i]);  // Hasz łańcucha
+		int c = 0;      // Licznik obiegów
+		int j = h;
+		int p = -1;
+		while(true) {
+			if(T[j] == "") {
+				break;
+			}
+			if(T[j] == Array[i]) {
+				p = j;
+				break;
+			}
+			j = (j + 1) % ileSlow;
+			if(j == h) {
+				break;
+			}
+			c++;
+			gettimeofday(&koniec,0);
+			long secs = koniec.tv_sec - start.tv_sec;
+			long usecs = koniec.tv_usec - start.tv_usec;
+			double czasUsuwania = secs + usecs*1e-6;
+			czasCalkowity += czasUsuwania;
+		}
+		// Wyświetlamy wyniki
+		cout << Array[i] << '\t' << "hf( ) = " << h << '\t' << "c = " << c << " ";
+		if( p > -1 ) {
+			cout << '\t' << "is in T["<< p << "]";
+		} else {
+			cout << '\t' << "-";
+		}
+		cout << endl;
 	}
 	sredniCzas = czasCalkowity/iteracje;
-	printf("Sredni czas: %.6f s\n\n", sredniCzas);
-    inorder(root);
+	plikWyjsciowy = fopen(czas,"a");
+	fprintf(plikWyjsciowy, "%d\t%f\t%f\n", ileSlow, czasWykonania, sredniCzas);
+	fclose(plikWyjsciowy);
 	printf("\nWcisnij ENTER aby zakonczyc\n", sredniCzas);
 	int ch = getchar();
 	return 0;
-    return 0;
 }
