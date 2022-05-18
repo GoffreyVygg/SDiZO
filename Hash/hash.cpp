@@ -12,7 +12,7 @@ int hf(string s) {
 	for(int i = 0; i < s.length(); i++) {
 		h = 2 * h + 1 - (s[i] & 1);
 	}
-	return h % 10;
+	return h % ileSlow;
 }
  
 int main() {
@@ -71,7 +71,7 @@ int main() {
 		}
 		cout << endl;
 	}
-	
+	cout << endl;
 	// Sprawdzamy obecność łańcuchów w tablicy haszowanej
 	for(int i = 0; i < ileSlow; i += 5) {
 		gettimeofday(&start,0);
